@@ -118,11 +118,11 @@ form {
 }
 
 @utility bg-gradient {
-  background: linear-gradient(to bottom, #f0f4ff 60%, #fa7185cc);
+  background: linear-gradient(to bottom, #e0f2f1 60%, #004d40);
 }
 
 @utility text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-[#AB8C95] via-[#000000] to-[#8E97C5];
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-[#00695C] via-[#012E27] to-[#00838F];
 }
 
 @utility gradient-hover {
@@ -130,8 +130,8 @@ form {
 }
 
 @utility primary-gradient {
-  background: linear-gradient(to bottom, #8e98ff, #606beb);
-  box-shadow: 0px 74px 21px 0px #6678ef00;
+  background: linear-gradient(to bottom, #00838f, #004d40);
+  box-shadow: 0px 74px 21px 0px #00695c55;
 }
 
 @utility primary-gradient-hover {

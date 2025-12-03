@@ -22,7 +22,7 @@ const auth = () => {
 
   useEffect(() => {
     if (auth.isAuthenticated) {
-      //   navigate(next);
+      navigate(next);
     }
   }, [auth.isAuthenticated, next]);
 
@@ -33,7 +33,7 @@ const auth = () => {
           <div className="flex flex-col gap-2 items-center text-center ">
             <h1>Welcome</h1>
             {auth.isAuthenticated ? (
-              <h2>You are already logged in</h2>
+              <h2>You are successfully logged in</h2>
             ) : (
               <h2>Login to continue your job hunt!</h2>
             )}
@@ -49,7 +49,7 @@ const auth = () => {
                   <div className="flex flex-col gap-4 items-center">
                     <button
                       className="auth-button"
-                      onClick={() => navigate("/")}
+                      onClick={() => navigate(next)}
                     >
                       <p>Go to Homepage</p>
                     </button>

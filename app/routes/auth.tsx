@@ -14,21 +14,29 @@ const auth = () => {
   const { isLoading, auth } = usePuterStore();
   const navigate = useNavigate();
   const location = useLocation();
-  const next = location.search.split("next=")[1] || "/";
+  //   const next = location.search.split("next=")[1] || "/";
+  const params = new URLSearchParams(location.search); // Validate that next is a relative path (starts with /) and doesn't contain protocol
+  const rawNext = params.get("next") || "/";
+  const next =
+    rawNext.startsWith("/") && !rawNext.startsWith("//") ? rawNext : "/";
 
   useEffect(() => {
     if (auth.isAuthenticated) {
-      navigate(next);
+      //   navigate(next);
     }
   }, [auth.isAuthenticated, next]);
 
   return (
     <main className="bg-[url('/images/bg-color.jpg')] bg-cover min-h-screen flex items-center justify-center">
-      <div className="gradiant-border shadow-lg">
+      <div className="gradient-border shadow-lg">
         <section className="flex flex-col gap-8 bg-white rounded-2xl p-10">
           <div className="flex flex-col gap-2 items-center text-center ">
             <h1>Welcome</h1>
-            <h2>Login to continue your job hunt!</h2>
+            {auth.isAuthenticated ? (
+              <h2>You are already logged in</h2>
+            ) : (
+              <h2>Login to continue your job hunt!</h2>
+            )}
           </div>
           <div>
             {isLoading ? (
@@ -38,9 +46,17 @@ const auth = () => {
             ) : (
               <>
                 {auth.isAuthenticated ? (
-                  <button className="auth-button" onClick={auth.signOut}>
-                    <p>Log out</p>
-                  </button>
+                  <div className="flex flex-col gap-4 items-center">
+                    <button
+                      className="auth-button"
+                      onClick={() => navigate("/")}
+                    >
+                      <p>Go to Homepage</p>
+                    </button>
+                    <button className="auth-button" onClick={auth.signOut}>
+                      <p>Log out</p>
+                    </button>
+                  </div>
                 ) : (
                   <button className="auth-button" onClick={auth.signIn}>
                     <p>Login</p>

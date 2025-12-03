@@ -23,16 +23,14 @@ export default function Home() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!auth.isAuthenticated) {
-      navigate("/auth?next=/");
-    }
+    if (!auth.isAuthenticated) navigate("/auth?next=/");
   }, [auth.isAuthenticated]);
   return (
-    <main className="bg-[url('/images/bg-wood.jpg')] bg-cover">
+    <main className="bg-[url('/images/bg-color.jpg')] bg-cover">
       <Navbar />
       <section className="main-section py-16">
-        <h1>Welcome to Resume Analyzer</h1>
-        <p>
+        <h1 className="font-bold">Welcome to ResTrack</h1>
+        <p className="text-2xl">
           Review your resume and get instant feeback to land your dream job!
         </p>
       </section>

@@ -1,24 +1,28 @@
 import { Link } from "react-router";
 import type { Resume } from "types";
 import ScoreCircle from "./ScoreCircle";
-const renderScoreCard = (title: string, score: number, tips: string[]) => (
-  <div className="score-card">
-    <h3>{title}</h3>
-    <div className="score">
-      <span className="score-value">{score}/100</span>
-    </div>
-    <div className="tips">
-      <h4>Tips:</h4>
-      <ul>
-        {tips.map((tip, index) => (
-          <li key={index}>{tip}</li>
-        ))}
-      </ul>
-    </div>
-  </div>
-);
+import { useI18n } from "~/lib/i18n";
 
 const ResumeCard = ({ resume }: { resume: Resume }) => {
+  const { t } = useI18n();
+
+  const renderScoreCard = (title: string, score: number, tips: string[]) => (
+    <div className="score-card">
+      <h3>{title}</h3>
+      <div className="score">
+        <span className="score-value">{score}/100</span>
+      </div>
+      <div className="tips">
+        <h4>{t("resume.tips")}</h4>
+        <ul>
+          {tips.map((tip, index) => (
+            <li key={index}>{tip}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+
   return (
     <Link
       to={`resume/${resume.id}`}
@@ -43,11 +47,21 @@ const ResumeCard = ({ resume }: { resume: Resume }) => {
         <div className="w-full h-full">
           <img
             src={resume.imagePath}
-            alt="resume image"
+            alt={t("resume.imageAlt")}
             className="w-full h-[350px] max-sm:h-[200px] object-cover object-top rounded-b-lg"
           />
         </div>
       </div>
+      {/* <div className="p-3 text-sm">
+        <a
+          href={resume.resumePath}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-primary"
+        >
+          {t("resume.viewPdf")}
+        </a>
+      </div> */}
     </Link>
   );
 };

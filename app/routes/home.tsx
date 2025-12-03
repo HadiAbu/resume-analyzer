@@ -7,6 +7,7 @@ import ResumeCard from "~/components/Resume";
 import { usePuterStore } from "~/lib/puter";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
+import { useI18n } from "~/lib/i18n";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -21,6 +22,7 @@ export function meta({}: Route.MetaArgs) {
 export default function Home() {
   const { auth } = usePuterStore();
   const navigate = useNavigate();
+  const { t } = useI18n();
 
   useEffect(() => {
     if (!auth.isAuthenticated) navigate("/auth?next=/");
@@ -29,10 +31,8 @@ export default function Home() {
     <main className="bg-[url('/images/bg-color.jpg')] bg-cover">
       <Navbar />
       <section className="main-section py-16">
-        <h1 className="font-bold">Welcome to ResTrack</h1>
-        <p className="text-2xl">
-          Review your resume and get instant feeback to land your dream job!
-        </p>
+        <h1 className="font-bold text-center">{t("homepage.welcome")}</h1>
+        <p className="text-2xl text-center">{t("homepage.subtitle")}</p>
       </section>
       {resumes && resumes.length > 0 && (
         <section className="resumes-section">

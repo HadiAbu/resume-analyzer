@@ -2,6 +2,7 @@ import { usePuterStore } from "~/lib/puter";
 import type { Route } from "../+types/root";
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router";
+import { useI18n } from "~/lib/i18n";
 
 export const meta: Route.MetaFunction = () => {
   return [
@@ -14,6 +15,8 @@ const auth = () => {
   const { isLoading, auth } = usePuterStore();
   const navigate = useNavigate();
   const location = useLocation();
+  const { t } = useI18n();
+
   //   const next = location.search.split("next=")[1] || "/";
   const params = new URLSearchParams(location.search); // Validate that next is a relative path (starts with /) and doesn't contain protocol
   const rawNext = params.get("next") || "/";
@@ -31,17 +34,17 @@ const auth = () => {
       <div className="gradient-border shadow-lg">
         <section className="flex flex-col gap-8 bg-white rounded-2xl p-10">
           <div className="flex flex-col gap-2 items-center text-center ">
-            <h1>Welcome</h1>
+            <h1>{t("auth.welcome")}</h1>
             {auth.isAuthenticated ? (
-              <h2>You are successfully logged in</h2>
+              <h2>{t("auth.loggedIn")}</h2>
             ) : (
-              <h2>Login to continue your job hunt!</h2>
+              <h2>{t("auth.logInToContinue")}</h2>
             )}
           </div>
           <div>
             {isLoading ? (
               <button className="auth-button animate-pulse">
-                <p>Signing you in..</p>
+                <p>{t("auth.signingIn")}</p>
               </button>
             ) : (
               <>
@@ -51,15 +54,15 @@ const auth = () => {
                       className="auth-button"
                       onClick={() => navigate(next)}
                     >
-                      <p>Go to Homepage</p>
+                      <p> {t("buttons.homepage")}</p>
                     </button>
                     <button className="auth-button" onClick={auth.signOut}>
-                      <p>Log out</p>
+                      <p> {t("buttons.logout")}</p>
                     </button>
                   </div>
                 ) : (
                   <button className="auth-button" onClick={auth.signIn}>
-                    <p>Login</p>
+                    <p> {t("buttons.login")}</p>
                   </button>
                 )}
               </>

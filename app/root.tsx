@@ -11,6 +11,7 @@ import type { Route } from "./+types/root";
 import "./app.css";
 import { usePuterStore } from "./lib/puter";
 import { useEffect } from "react";
+import { LanguageProvider } from "./lib/i18n";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -33,7 +34,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
   }, [init]);
 
   return (
-    <html lang="en">
+    <html>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -43,7 +44,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <body>
         <script src="https://js.puter.com/v2/"></script>
 
-        {children}
+        <LanguageProvider>{children}</LanguageProvider>
         <ScrollRestoration />
         <Scripts />
       </body>

@@ -18,6 +18,8 @@ const ar = {
   },
   upload: {
     heading: "احصل على ملاحظات ذكية لسيرتك الذاتية",
+    processing: "جارٍ معالجة سيرتك الذاتية...",
+    uploadButton: "رفع السيرة الذاتية",
   },
   auth: {
     welcome: "مرحبًا",

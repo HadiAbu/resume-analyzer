@@ -78,6 +78,9 @@ form {
   .main-section {
     @apply flex flex-col items-center gap-8 pt-12 mx-15 pb-5;
   }
+  .main-section-upload-form {
+    @apply flex flex-col gap-8 pt-12 mx-15 pb-5;
+  }
   .page-heading {
     @apply flex flex-col items-center gap-8 max-w-4xl text-center;
   }

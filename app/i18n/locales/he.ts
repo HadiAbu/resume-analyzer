@@ -18,6 +18,8 @@ const he = {
   },
   upload: {
     heading: "קבל משוב חכם על קורות החיים שלך",
+    processing: "מעבד את קורות החיים שלך...",
+    uploadButton: "העלה קורות חיים",
   },
   auth: {
     welcome: "ברוך הבא",

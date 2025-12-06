@@ -20,6 +20,8 @@ const en = {
   },
   upload: {
     heading: "Get your smart feedback for your resume",
+    processing: "Processing your resume...",
+    uploadButton: "Upload Resume",
   },
   auth: {
     welcome: "Welcome",

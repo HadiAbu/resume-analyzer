@@ -99,7 +99,7 @@ const upload = () => {
 
     setStatusText(t("upload.AnalysisComplete"));
     setIsProcessing(false);
-    // navigate(`/resume/${uuid}`);
+    navigate(`/resume/${uuid}`);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

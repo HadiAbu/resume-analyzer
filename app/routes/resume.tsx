@@ -49,9 +49,10 @@ const Resume = () => {
       if (!imageBlob) return;
       const imageUrl = URL.createObjectURL(imageBlob);
       setImageUrl(imageUrl);
-
-      setFeedback(data.feedback);
-      console.log({ resumeUrl, imageUrl, feedback: data.feedback });
+      const feedbackData = JSON.parse(data.feedback[0].text);
+      setFeedback(feedbackData);
+      console.log(feedbackData);
+      console.log({ resumeUrl, imageUrl, feedback: feedbackData });
     };
 
     loadResume();

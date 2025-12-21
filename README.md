@@ -3,6 +3,8 @@
 A tool designed to help give you feedback and tips on your resume and relevancy for the role, with ATS scores, tips and more!
 
 <img width="1711" height="854" alt="image" src="https://github.com/user-attachments/assets/4eb5e8ae-552e-4424-bb85-df679568e20e" />
+<img width="1729" height="848" alt="image" src="https://github.com/user-attachments/assets/58c4ca9f-d0fa-4a6b-8580-2a326e563fbf" />
+
 
 
 ### Installation

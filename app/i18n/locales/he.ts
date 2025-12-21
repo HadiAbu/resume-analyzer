@@ -26,6 +26,9 @@ const he = {
     analyze: "מנתח את קורות החיים...",
     analyzeError: "שגיאה: ניתוח קורות החיים נכשל",
     AnalysisComplete: "הניתוח הושלם!",
+    companyName: "שם החברה",
+    jobTitle: "תפקיד",
+    jobDescription: "תיאור התפקיד",
   },
   auth: {
     welcome: "ברוך הבא",

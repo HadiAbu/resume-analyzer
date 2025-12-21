@@ -28,6 +28,9 @@ const en = {
     analyze: "Analyzing resume...",
     analyzeError: "Error: Failed to analyze resume",
     AnalysisComplete: "Analysis complete!",
+    companyName: "Company Name",
+    jobTitle: "Job Title",
+    jobDescription: "Job Description",
   },
   auth: {
     welcome: "Welcome",

@@ -123,11 +123,13 @@ const upload = () => {
     <main className="bg-[url('/images/bg-color.jpg')] bg-cover">
       <Navbar />
       <section className="main-section-upload-form py-16">
-        <h3 className="text-[#fff] text-2xl">{t("upload.heading")}</h3>
+        <h3 className="text-[#fff] text-2xl text-center">
+          {t("upload.heading")}
+        </h3>
         <div className="page-heading">
           {isProcessing ? (
             <>
-              <h2 className="h2-analysis">{statusText}</h2>
+              <h3 className="h2-analysis">{statusText}</h3>
               <img
                 src="/images/resume-scan.gif"
                 className="w-full"

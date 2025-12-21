@@ -26,6 +26,9 @@ const ar = {
     analyze: "جارٍ تحليل السيرة الذاتية...",
     analyzeError: "خطأ: فشل في تحليل السيرة الذاتية",
     AnalysisComplete: "اكتمل التحليل!",
+    companyName: "اسم الشركة",
+    jobTitle: "اسم الوظيفة",
+    jobDescription: "وصف الوظيفة",
   },
   auth: {
     welcome: "مرحبًا",

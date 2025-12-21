@@ -87,12 +87,19 @@ const upload = () => {
       ? feedback.message.content
       : feedback.message.content[0].text;
 
-    data.feedback = JSON.parse(feedbackText);
-    await kv.set(`resume-${uuid}`, JSON.stringify(data));
+    console.log(feedbackText);
+    data.feedback = feedbackText;
+    console.log(data);
+    try {
+      await kv.set(`resume-${uuid}`, JSON.stringify(data));
+    } catch (e) {
+      console.error("Error saving feedback to KV:", e);
+      return setStatusText(t("upload.analyzeError"));
+    }
 
     setStatusText(t("upload.AnalysisComplete"));
-    console.log(data);
-    navigate(`/resume/${uuid}`);
+    setIsProcessing(false);
+    // navigate(`/resume/${uuid}`);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -107,7 +114,6 @@ const upload = () => {
     const jobDescription = formData.get("jobDescription") as string;
 
     handleAnalyze({ companyName, jobTitle, jobDescription, file });
-    setIsProcessing(false);
   };
   const handleFileSelect = (file: File | null) => {
     setFile(file);
@@ -121,7 +127,7 @@ const upload = () => {
         <div className="page-heading">
           {isProcessing ? (
             <>
-              <h2 className="text-white text-2xl">{statusText}</h2>
+              <h2 className="h2-analysis">{statusText}</h2>
               <img
                 src="/images/resume-scan.gif"
                 className="w-full"
@@ -129,44 +135,42 @@ const upload = () => {
               />
             </>
           ) : (
-            !isProcessing && (
-              <form
-                onSubmit={handleSubmit}
-                id="upload-form"
-                className="flex flex-col gap-4 w-full"
-              >
-                <div className="form-div">
-                  <label htmlFor="companyName">
-                    <p className="text-white">Company Name</p>
-                  </label>
-                  <input type="text" name="companyName" id="companyName" />
-                </div>
-                <div className="form-div">
-                  <label htmlFor="jobTitle">
-                    <p className="text-white">Job TItle</p>
-                  </label>
-                  <input type="text" name="companyName" />
-                </div>
-                <div className="form-div">
-                  <label htmlFor="jobDescription">
-                    <p className="text-white">Job Description</p>
-                  </label>
-                  <textarea rows={5} name="jobDescription" />
-                </div>
-                <div className="form-div">
-                  <label htmlFor="uploader"></label>
-                  <FileUploader onFileSelect={handleFileSelect} />
-                </div>
-                <div className="w-full flex justify-center">
-                  <button
-                    type="submit"
-                    className="primary-button align-self-center w-fit"
-                  >
-                    {t("upload.uploadButton")}
-                  </button>
-                </div>
-              </form>
-            )
+            <form
+              onSubmit={handleSubmit}
+              id="upload-form"
+              className="flex flex-col gap-4 w-full"
+            >
+              <div className="form-div">
+                <label htmlFor="companyName">
+                  <p className="text-white">Company Name</p>
+                </label>
+                <input type="text" name="companyName" id="companyName" />
+              </div>
+              <div className="form-div">
+                <label htmlFor="jobTitle">
+                  <p className="text-white">Job TItle</p>
+                </label>
+                <input type="text" name="companyName" />
+              </div>
+              <div className="form-div">
+                <label htmlFor="jobDescription">
+                  <p className="text-white">Job Description</p>
+                </label>
+                <textarea rows={5} name="jobDescription" />
+              </div>
+              <div className="form-div">
+                <label htmlFor="uploader"></label>
+                <FileUploader onFileSelect={handleFileSelect} />
+              </div>
+              <div className="w-full flex justify-center">
+                <button
+                  type="submit"
+                  className="primary-button align-self-center w-fit"
+                >
+                  {t("upload.uploadButton")}
+                </button>
+              </div>
+            </form>
           )}
         </div>
       </section>

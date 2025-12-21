@@ -27,6 +27,7 @@ const en = {
     convertError: "Error converting PDF to image.",
     analyze: "Analyzing resume...",
     analyzeError: "Error: Failed to analyze resume",
+    AnalysisComplete: "Analysis complete!",
   },
   auth: {
     welcome: "Welcome",

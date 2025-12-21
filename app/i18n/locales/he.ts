@@ -25,6 +25,7 @@ const he = {
     convertError: "שגיאה בהמרת PDF לתמונה.",
     analyze: "מנתח את קורות החיים...",
     analyzeError: "שגיאה: ניתוח קורות החיים נכשל",
+    AnalysisComplete: "הניתוח הושלם!",
   },
   auth: {
     welcome: "ברוך הבא",

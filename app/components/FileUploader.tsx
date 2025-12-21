@@ -33,7 +33,7 @@ const FileUploader = ({ onFileSelect }: FileUploaderProps) => {
               className="uploader-selected-file "
               onClick={(e) => e.stopPropagation()}
             >
-              <img src="/images/pdf.png" alt="pdf" className="w-4 h-4" />
+              <img src="/images/pdf.png" alt="pdf" className="w-9 h-9" />
               <div className="flex items-center ">
                 <div>
                   <p className="text-lg font-medium truncate">{file.name}</p>
@@ -42,11 +42,12 @@ const FileUploader = ({ onFileSelect }: FileUploaderProps) => {
               </div>
               <button
                 className="p-2 cursor-pointer"
+                type="button"
                 onClick={(e) => {
                   onFileSelect?.(null);
                 }}
               >
-                <img src="/icons/cross.svg" alt="remove" className="w-4 h-4" />
+                <img src="/icons/cross.svg" alt="remove" className="w-9 h-9" />
               </button>
             </div>
           ) : (

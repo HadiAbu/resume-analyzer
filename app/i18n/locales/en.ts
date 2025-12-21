@@ -22,6 +22,11 @@ const en = {
     heading: "Get your smart feedback for your resume",
     processing: "Processing your resume...",
     uploadButton: "Upload Resume",
+    uploadError: "Error uploading file. Please try again.",
+    converting: "Converting your resume to image",
+    convertError: "Error converting PDF to image.",
+    analyze: "Analyzing resume...",
+    analyzeError: "Error: Failed to analyze resume",
   },
   auth: {
     welcome: "Welcome",

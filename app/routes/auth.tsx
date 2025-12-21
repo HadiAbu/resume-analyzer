@@ -23,11 +23,11 @@ const auth = () => {
   const next =
     rawNext.startsWith("/") && !rawNext.startsWith("//") ? rawNext : "/";
 
-  useEffect(() => {
-    if (auth.isAuthenticated) {
-      navigate(next);
-    }
-  }, [auth.isAuthenticated, next]);
+  // useEffect(() => {
+  //   if (auth.isAuthenticated) {
+  //     // navigate(next);
+  //   }
+  // }, [auth.isAuthenticated, next]);
 
   return (
     <main className="bg-[url('/images/bg-color.jpg')] bg-cover min-h-screen flex items-center justify-center">

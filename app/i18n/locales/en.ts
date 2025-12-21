@@ -9,6 +9,7 @@ const en = {
   navbar: {
     brand: "ResTack",
     upload: "Upload Resume",
+    auth: "Login/Sign Up",
   },
   resume: {
     tips: "Tips:",

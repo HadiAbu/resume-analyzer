@@ -7,6 +7,7 @@ const ar = {
   navbar: {
     brand: "ريزتاك",
     upload: "رفع السيرة الذاتية",
+    auth: "تسجل/تسجيل الدخول",
   },
   resume: {
     tips: "نصائح:",

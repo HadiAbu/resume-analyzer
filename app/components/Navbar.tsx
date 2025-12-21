@@ -13,6 +13,9 @@ const Navbar = () => {
         <Link to="/upload" className="primary-button w-fit">
           {t("navbar.upload")}
         </Link>
+        <Link to="/auth" className="primary-button w-fit">
+          {t("navbar.auth")}
+        </Link>
 
         <select
           aria-label="Language"

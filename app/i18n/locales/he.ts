@@ -7,6 +7,7 @@ const he = {
   navbar: {
     brand: "רסטאק",
     upload: "העלה קורות חיים",
+    auth: "הרשמה/התחברות",
   },
   resume: {
     tips: "טיפים:",

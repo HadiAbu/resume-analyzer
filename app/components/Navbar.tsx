@@ -1,8 +1,10 @@
 import { Link } from "react-router";
 import { useI18n } from "~/lib/i18n";
+import { usePuterStore } from "~/lib/puter";
 
 const Navbar = () => {
   const { t, locale, setLocale } = useI18n();
+  const { isLoading, auth } = usePuterStore();
 
   return (
     <nav className="navbar">
@@ -13,8 +15,8 @@ const Navbar = () => {
         <Link to="/upload" className="primary-button w-fit">
           {t("navbar.upload")}
         </Link>
-        <Link to="/auth" className="primary-button w-fit">
-          {t("navbar.auth")}
+        <Link to="/auth" className="secondary-button w-fit">
+          {auth.isAuthenticated ? t("navbar.signout") : t("navbar.auth")}
         </Link>
 
         <select

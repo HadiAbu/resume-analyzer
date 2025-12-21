@@ -10,6 +10,7 @@ const en = {
     brand: "ResTack",
     upload: "Upload Resume",
     auth: "Login/Sign Up",
+    signout: "Sign Out",
   },
   resume: {
     tips: "Tips:",

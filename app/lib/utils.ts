@@ -1,3 +1,6 @@
+import { type ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+
 export const capitalize = (s: string) => {
   if (s.length === 0) return s;
   return s.charAt(0).toUpperCase() + s.slice(1);
@@ -20,6 +23,9 @@ export const formatDate = (dateString: string) => {
 export const extractFileName = (filePath: string) => {
   return filePath.split("/").pop() || filePath;
 };
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
 
 export const formatSize = (bytes: number): string => {
   if (bytes === 0) return "0 Bytes";

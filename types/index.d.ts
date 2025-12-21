@@ -6,6 +6,11 @@ export interface Resume {
   resumePath: string;
   feedback: Feedback;
 }
+export interface Suggestion {
+  type: "good" | "improve";
+  tip: string;
+  explination?: string;
+}
 
 export interface Feedback {
   overallScore: number;

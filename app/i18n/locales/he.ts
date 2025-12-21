@@ -8,6 +8,7 @@ const he = {
     brand: "רסטאק",
     upload: "העלה קורות חיים",
     auth: "הרשמה/התחברות",
+    signout: "התנתקות",
   },
   resume: {
     tips: "טיפים:",

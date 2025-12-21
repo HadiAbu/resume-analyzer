@@ -6,6 +6,7 @@ import { useI18n } from "~/lib/i18n";
 import { convertPdfToImage } from "~/lib/pdf2image";
 import { usePuterStore } from "~/lib/puter";
 import { prepareInstructions } from "~/lib/constants";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 const meta = {
   title: "ResTrack | Upload",
@@ -18,6 +19,9 @@ const upload = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [statusText, setStatusText] = useState("");
   const [file, setFile] = useState<File | null>(null);
+
+  const uuid = crypto.randomUUID();
+  const [resume, setResume] = useLocalStorage(uuid, {});
 
   const { t } = useI18n();
 
@@ -58,7 +62,6 @@ const upload = () => {
       return setStatusText(t("upload.uploadError"));
     }
 
-    const uuid = crypto.randomUUID();
     const data = {
       id: uuid,
       resumePath: uploadedFile.path,
@@ -92,6 +95,7 @@ const upload = () => {
     console.log(data);
     try {
       await kv.set(`resume-${uuid}`, JSON.stringify(data));
+      setResume({ ...resume, data });
     } catch (e) {
       console.error("Error saving feedback to KV:", e);
       return setStatusText(t("upload.analyzeError"));

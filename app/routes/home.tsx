@@ -32,7 +32,9 @@ export default function Home() {
       <Navbar />
       <section className="main-section py-16">
         <h1 className="font-bold text-center">{t("homepage.welcome")}</h1>
-        <p className="text-2xl text-center">{t("homepage.subtitle")}</p>
+        <p className="text-2xl text-center text-white">
+          {t("homepage.subtitle")}
+        </p>
       </section>
       {resumes && resumes.length > 0 && (
         <section className="resumes-section">

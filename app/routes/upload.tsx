@@ -144,21 +144,21 @@ const upload = () => {
             >
               <div className="form-div">
                 <label htmlFor="companyName">
-                  <p className="text-white">Company Name</p>
+                  <p className="text-white">{t("upload.companyName")}</p>
                 </label>
                 <input type="text" name="companyName" id="companyName" />
               </div>
               <div className="form-div">
                 <label htmlFor="jobTitle">
-                  <p className="text-white">Job TItle</p>
+                  <p className="text-white">{t("upload.jobTitle")}</p>
                 </label>
-                <input type="text" name="companyName" />
+                <input type="text" name="jobTitle" id="jobTitle" />
               </div>
               <div className="form-div">
                 <label htmlFor="jobDescription">
-                  <p className="text-white">Job Description</p>
+                  <p className="text-white">{t("upload.jobDescription")}</p>
                 </label>
-                <textarea rows={5} name="jobDescription" />
+                <textarea rows={5} name="jobDescription" id="jobDescription" />
               </div>
               <div className="form-div">
                 <label htmlFor="uploader"></label>

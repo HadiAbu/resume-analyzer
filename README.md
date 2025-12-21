@@ -1,20 +1,9 @@
-# Welcome to React Router!
+# Welcome to Resume Analyzer!
 
-A modern, production-ready template for building full-stack React applications using React Router.
+A tool designed to help give you feedback and tips on your resume and relevancy for the role, with ATS scores, tips and more!
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+<img width="1711" height="854" alt="image" src="https://github.com/user-attachments/assets/4eb5e8ae-552e-4424-bb85-df679568e20e" />
 
-## Features
-
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
-
-## Getting Started
 
 ### Installation
 
@@ -60,9 +49,6 @@ The containerized application can be deployed to any platform that supports Dock
 - AWS ECS
 - Google Cloud Run
 - Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
 
 ### DIY Deployment
 

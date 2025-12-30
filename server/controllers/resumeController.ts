@@ -1,11 +1,59 @@
 // controllers/resumeController.ts
-import OpenAI from "openai";
+import { OpenAI } from "openai";
 import { Request, Response } from "express";
-import { AIResponseFormat } from "server/types";
+export const AIResponseFormat = `
+      interface Feedback {
+      overallScore: number; //max 100
+      ATS: {
+        score: number; //rate based on ATS suitability
+        tips: {
+          type: "good" | "improve";
+          tip: string; //give 3-4 tips
+        }[];
+      };
+      toneAndStyle: {
+        score: number; //max 100
+        tips: {
+          type: "good" | "improve";
+          tip: string; //make it a short "title" for the actual explanation
+          explanation: string; //explain in detail here
+        }[]; //give 3-4 tips
+      };
+      content: {
+        score: number; //max 100
+        tips: {
+          type: "good" | "improve";
+          tip: string; //make it a short "title" for the actual explanation
+          explanation: string; //explain in detail here
+        }[]; //give 3-4 tips
+      };
+      structure: {
+        score: number; //max 100
+        tips: {
+          type: "good" | "improve";
+          tip: string; //make it a short "title" for the actual explanation
+          explanation: string; //explain in detail here
+        }[]; //give 3-4 tips
+      };
+      skills: {
+        score: number; //max 100
+        tips: {
+          type: "good" | "improve";
+          tip: string; //make it a short "title" for the actual explanation
+          explanation: string; //explain in detail here
+        }[]; //give 3-4 tips
+      };
+    }`;
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const apiKey = process.env.OPENAI_API_KEY;
 
 export const analyzeResume = async (req: Request, res: Response) => {
+  const openai = new OpenAI({ apiKey: apiKey });
+  console.log(
+    "Checking Key:",
+    process.env.OPENAI_API_KEY ? "Found" : "Missing"
+  );
+  console.log("BACKEND: Received analyzeResume request with body:", req.body);
   try {
     const { text, jobTitle, jobDescription } = req.body;
 

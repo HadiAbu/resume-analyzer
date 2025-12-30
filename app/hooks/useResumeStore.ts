@@ -38,10 +38,12 @@ export const useResumeStore = create<ResumeState>((set) => ({
   results: null,
 
   analyzeResume: async (file: File) => {
+    console.log("Analyzing resume");
     set({ isAnalyzing: true });
     try {
       // 1. Convert to text locally
       const extractedText = await convertPdfToText(file);
+      console.log("Extracted Text:", extractedText);
 
       // 2. Send plain JSON to backend
       const response = await axios.post("http://localhost:5000/api/analyze", {

@@ -4,14 +4,16 @@ if (typeof window !== "undefined" && !window.DOMMatrix) {
     (window as any).WebKitCSSMatrix || (window as any).MSCSSMatrix;
 }
 
+// app/src/utils/pdfParser.ts
 import * as pdfjs from "pdfjs-dist/legacy/build/pdf.mjs";
 
-// Point to the worker source (required for the library to function)
-pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.mjs`;
+// Use a reliable CDN for the worker if local paths fail
+pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 export const convertPdfToText = async (file: File): Promise<string> => {
   const arrayBuffer = await file.arrayBuffer();
-  const pdf = await pdfjs.getDocument(arrayBuffer).promise;
+  const loadingTask = pdfjs.getDocument({ data: arrayBuffer });
+  const pdf = await loadingTask.promise;
   let fullText = "";
 
   for (let i = 1; i <= pdf.numPages; i++) {
@@ -20,6 +22,5 @@ export const convertPdfToText = async (file: File): Promise<string> => {
     const pageText = textContent.items.map((item: any) => item.str).join(" ");
     fullText += pageText + "\n";
   }
-
   return fullText;
 };

@@ -44,6 +44,7 @@ const upload = () => {
     if (!file || !jobTitle || !jobDescription) return;
 
     // The store now handles the conversion and the axios call
+    console.log("Starting analysis in upload route");
     await analyzeResume(file, jobTitle, jobDescription);
 
     // Upload PDF file
@@ -92,7 +93,7 @@ const upload = () => {
             <form
               onSubmit={handleSubmit}
               id="upload-form"
-              className="flex flex-col gap-4 w-full"
+              className="flex flex-col gap-2 w-full"
             >
               <div className="form-div">
                 <label htmlFor="companyName">

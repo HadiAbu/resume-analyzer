@@ -6,23 +6,6 @@ import { useI18n } from "~/lib/i18n";
 const ResumeCard = ({ resume }: { resume: Resume }) => {
   const { t } = useI18n();
 
-  const renderScoreCard = (title: string, score: number, tips: string[]) => (
-    <div className="score-card">
-      <h3>{title}</h3>
-      <div className="score">
-        <span className="score-value">{score}/100</span>
-      </div>
-      <div className="tips">
-        <h4>{t("resume.tips")}</h4>
-        <ul>
-          {tips.map((tip, index) => (
-            <li key={index}>{tip}</li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  );
-
   return (
     <Link
       to={`resume/${resume.id}`}

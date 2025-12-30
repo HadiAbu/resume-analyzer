@@ -1,8 +1,9 @@
-import { usePuterStore } from "~/lib/puter";
-import type { Route } from "../+types/root";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router";
+import type { Route } from "../+types/root";
 import { useI18n } from "~/lib/i18n";
+import { useAuthStore } from "../hooks/useAuthStore";
+import axios from "axios";
 
 export const meta: Route.MetaFunction = () => {
   return [
@@ -11,67 +12,146 @@ export const meta: Route.MetaFunction = () => {
   ];
 };
 
-const auth = () => {
-  const { isLoading, auth } = usePuterStore();
+const Auth = () => {
+  // New Auth Store hooks
+  const { setAuth, logout, isAuthenticated, user } = useAuthStore();
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useI18n();
 
-  //   const next = location.search.split("next=")[1] || "/";
-  const params = new URLSearchParams(location.search); // Validate that next is a relative path (starts with /) and doesn't contain protocol
+  // Form & UI State
+  const [isLogin, setIsLogin] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  // Handle "next" redirect path
+  const params = new URLSearchParams(location.search);
   const rawNext = params.get("next") || "/";
   const next =
     rawNext.startsWith("/") && !rawNext.startsWith("//") ? rawNext : "/";
 
   // useEffect(() => {
-  //   if (auth.isAuthenticated) {
-  //     // navigate(next);
+  //   if (isAuthenticated) {
+  //     navigate(next);
   //   }
-  // }, [auth.isAuthenticated, next]);
+  // }, [isAuthenticated, next, navigate]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+
+    try {
+      const endpoint = isLogin ? "/api/auth/login" : "/api/auth/register";
+      const response = await axios.post(
+        `http://localhost:5000${endpoint}`,
+        formData
+      );
+
+      if (isLogin) {
+        // Response contains { token, user }
+        setAuth(response.data.user, response.data.token);
+      } else {
+        // After register, switch to login
+        setIsLogin(true);
+        alert("Account created! Please log in.");
+      }
+    } catch (err: any) {
+      setError(err.response?.data?.error || "Authentication failed");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <main className="bg-[url('/images/bg-color.jpg')] bg-cover min-h-screen flex items-center justify-center">
-      <div className="gradient-border shadow-lg">
-        <section className="flex flex-col gap-8 bg-white rounded-2xl p-10">
-          <div className="flex flex-col gap-2 items-center text-center ">
-            <h1>{t("auth.welcome")}</h1>
-            {auth.isAuthenticated ? (
-              <h2>{t("auth.loggedIn")}</h2>
-            ) : (
-              <h2>{t("auth.logInToContinue")}</h2>
-            )}
+    <main className="bg-[url('/images/bg-color.jpg')] bg-cover min-h-screen flex items-center justify-center p-4">
+      <div className="gradient-border shadow-lg max-w-md w-full">
+        <section className="flex flex-col gap-6 bg-white rounded-2xl p-10">
+          <div className="flex flex-col gap-2 items-center text-center">
+            <h1 className="text-2xl font-bold">{t("auth.welcome")}</h1>
+            <h2 className="text-gray-500">
+              {isAuthenticated
+                ? t("auth.loggedIn")
+                : isLogin
+                  ? t("auth.logInToContinue")
+                  : "Create your account"}
+            </h2>
           </div>
-          <div>
-            {isLoading ? (
-              <button className="auth-button animate-pulse">
-                <p>{t("auth.signingIn")}</p>
+
+          {isAuthenticated ? (
+            <div className="flex flex-col gap-4">
+              <button
+                className="auth-button w-full"
+                onClick={() => navigate("/")}
+              >
+                {t("buttons.homepage")}
               </button>
-            ) : (
-              <>
-                {auth.isAuthenticated ? (
-                  <div className="flex flex-col gap-4 items-center">
-                    <button
-                      className="auth-button"
-                      onClick={() => navigate(next)}
-                    >
-                      <p> {t("buttons.homepage")}</p>
-                    </button>
-                    <button className="auth-button" onClick={auth.signOut}>
-                      <p> {t("buttons.logout")}</p>
-                    </button>
-                  </div>
-                ) : (
-                  <button className="auth-button" onClick={auth.signIn}>
-                    <p> {t("buttons.login")}</p>
-                  </button>
-                )}
-              </>
-            )}
-          </div>
+              <button className="auth-button w-full bg-red-50" onClick={logout}>
+                {t("buttons.logout")}
+              </button>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+              {
+                <>
+                  <input
+                    className="p-3 border rounded-xl outline-none focus:ring-2 focus:ring-blue-400"
+                    type="email"
+                    placeholder="Email"
+                    required
+                    value={formData.email}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
+                  />
+                  <input
+                    className="p-3 border rounded-xl outline-none focus:ring-2 focus:ring-blue-400"
+                    type="password"
+                    placeholder="Password"
+                    required
+                    value={formData.password}
+                    onChange={(e) =>
+                      setFormData({ ...formData, password: e.target.value })
+                    }
+                  />
+                </>
+              }
+
+              {error && (
+                <p className="text-red-500 text-sm text-center">{error}</p>
+              )}
+
+              <button
+                type="submit"
+                disabled={loading}
+                className={`auth-button w-full ${loading ? "animate-pulse" : ""}`}
+              >
+                {loading
+                  ? t("auth.signingIn")
+                  : isLogin
+                    ? t("buttons.login")
+                    : "Register"}
+              </button>
+
+              <button
+                type="button"
+                className="text-blue-500 text-sm hover:underline"
+                onClick={() => setIsLogin(!isLogin)}
+              >
+                {isLogin
+                  ? "Need an account? Register"
+                  : "Have an account? Login"}
+              </button>
+            </form>
+          )}
         </section>
       </div>
     </main>
   );
 };
 
-export default auth;
+export default Auth;

@@ -7,6 +7,7 @@ import { convertPdfToImage } from "~/lib/pdf2image";
 import { usePuterStore } from "~/lib/puter";
 import { prepareInstructions } from "~/lib/constants";
 import { useLocalStorage } from "../hooks/useLocalStorage";
+import { useResumeStore } from "~/hooks/useResumeStore";
 
 const meta = {
   title: "ResTrack | Upload",
@@ -14,15 +15,16 @@ const meta = {
 };
 
 const upload = () => {
-  const { auth, isLoading, fs, ai, kv } = usePuterStore();
-  const navigate = useNavigate();
+  // const { auth, isLoading, fs, ai, kv } = usePuterStore();
   const [isProcessing, setIsProcessing] = useState(false);
   const [statusText, setStatusText] = useState("");
+
+  // const uuid = crypto.randomUUID();
+  // const [resume, setResume] = useLocalStorage(uuid, {});
+
+  const navigate = useNavigate();
   const [file, setFile] = useState<File | null>(null);
-
-  const uuid = crypto.randomUUID();
-  const [resume, setResume] = useLocalStorage(uuid, {});
-
+  const { analyzeResume, isAnalyzing } = useResumeStore();
   const { t } = useI18n();
 
   const handleAnalyze = async ({
@@ -39,70 +41,16 @@ const upload = () => {
     if (!file) return;
     setIsProcessing(true);
 
+    if (!file || !jobTitle || !jobDescription) return;
+
+    // The store now handles the conversion and the axios call
+    await analyzeResume(file, jobTitle, jobDescription);
+
     // Upload PDF file
-    console.log("Starting analysis...");
     setStatusText(t("upload.processing"));
-    const uploadedFile = await fs.upload([file]);
-    if (!uploadedFile) {
-      return setStatusText(t("upload.uploadError"));
-    }
-
-    // Convert PDF to image
-    console.log("Starting conversion...");
-    setStatusText(t("upload.converting"));
-    const imageFile = await convertPdfToImage(file);
-    if (!imageFile.file) {
-      return setStatusText(t("upload.convertError"));
-    }
-
-    // Upload image file
-    console.log("Starting upload image...");
-    const uploadedImage = await fs.upload([imageFile.file]);
-    if (!uploadedImage) {
-      return setStatusText(t("upload.uploadError"));
-    }
-
-    const data = {
-      id: uuid,
-      resumePath: uploadedFile.path,
-      imagePath: uploadedImage.path,
-      companyName,
-      jobTitle,
-      jobDescription,
-      feedback: "",
-    };
-
-    await kv.set(`resume-${uuid}`, JSON.stringify(data));
-    setStatusText(t("upload.analyze"));
-
-    console.log("Starting feedback generation...");
-
-    const feedback = await ai.feedback(
-      uploadedFile.path,
-      prepareInstructions({
-        jobTitle,
-        jobDescription,
-      })
-    );
-    if (!feedback) return setStatusText(t("upload.analyzeError"));
-
-    const feedbackText = typeof (feedback.message.content === "string")
-      ? feedback.message.content
-      : feedback.message.content[0].text;
-
-    console.log(feedbackText);
-    data.feedback = feedbackText;
-    console.log(data);
-    try {
-      await kv.set(`resume-${uuid}`, JSON.stringify(data));
-      setResume({ ...resume, data });
-    } catch (e) {
-      console.error("Error saving feedback to KV:", e);
-      return setStatusText(t("upload.analyzeError"));
-    }
-
     setStatusText(t("upload.AnalysisComplete"));
     setIsProcessing(false);
+    const uuid = crypto.randomUUID();
     navigate(`/resume/${uuid}`);
   };
 

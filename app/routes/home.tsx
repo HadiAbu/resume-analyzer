@@ -24,9 +24,9 @@ export default function Home() {
   const { t } = useI18n();
   const { auth, kv } = usePuterStore();
 
-  useEffect(() => {
-    if (!auth.isAuthenticated) navigate("/auth?next=/");
-  }, [auth.isAuthenticated]);
+  // useEffect(() => {
+  //   if (!auth.isAuthenticated) navigate("/auth?next=/");
+  // }, [auth.isAuthenticated]);
   return (
     <main className="bg-[url('/images/bg-color.jpg')] bg-cover">
       <Navbar />

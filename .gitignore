@@ -1,6 +1,11 @@
 .DS_Store
 .env
 /node_modules/
+server/node_modules/
+/dist/
+/server/dist/
+/logs/
+*.log
 
 # React Router
 /.react-router/

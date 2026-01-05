@@ -41,7 +41,7 @@ An AI-powered platform designed to help job seekers optimize their resumes for A
 1.  **Clone the repository:**
 
     ```bash
-    git clone [https://github.com/HadiAbu/resume-analyzer.git](https://github.com/HadiAbu/resume-analyzer.git)
+    git clone https://github.com/HadiAbu/resume-analyzer.git
     cd resume-analyzer
     ```
 
@@ -68,7 +68,7 @@ An AI-powered platform designed to help job seekers optimize their resumes for A
     npm run dev
     ```
 
-5.  Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5.  Open http://localhost:3000 (the frontend) with your browser to see the result.
 
 ## 🔑 Key Configuration
 

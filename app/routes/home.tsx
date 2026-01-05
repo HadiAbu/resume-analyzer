@@ -2,11 +2,7 @@ import type { Route } from "./+types/home";
 import { resumes } from "~/lib/constants";
 import Navbar from "~/components/Navbar";
 import type { Resume as ResumeType } from "types";
-// import ResumeComponent from "~/components/Resume";
 import ResumeCard from "~/components/Resume";
-import { usePuterStore } from "~/lib/puter";
-import { useNavigate } from "react-router";
-import { useEffect } from "react";
 import { useI18n } from "~/lib/i18n";
 
 export function meta({}: Route.MetaArgs) {
@@ -20,13 +16,8 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  const navigate = useNavigate();
   const { t } = useI18n();
-  const { auth, kv } = usePuterStore();
 
-  // useEffect(() => {
-  //   if (!auth.isAuthenticated) navigate("/auth?next=/");
-  // }, [auth.isAuthenticated]);
   return (
     <main className="bg-[url('/images/bg-color.jpg')] bg-cover">
       <Navbar />

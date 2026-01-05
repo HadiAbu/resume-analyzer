@@ -9,7 +9,7 @@ export interface Resume {
 export interface Suggestion {
   type: "good" | "improve";
   tip: string;
-  explination?: string;
+  explanation?: string;
 }
 
 export interface Feedback {

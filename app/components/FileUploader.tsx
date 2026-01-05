@@ -7,7 +7,6 @@ type FileUploaderProps = {
 };
 
 const FileUploader = ({ onFileSelect }: FileUploaderProps) => {
-  console.log("Rendering FileUploader");
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
       // Do something with the files

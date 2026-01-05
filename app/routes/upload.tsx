@@ -3,10 +3,6 @@ import { useNavigate } from "react-router";
 import FileUploader from "~/components/FileUploader";
 import Navbar from "~/components/Navbar";
 import { useI18n } from "~/lib/i18n";
-import { convertPdfToImage } from "~/lib/pdf2image";
-import { usePuterStore } from "~/lib/puter";
-import { prepareInstructions } from "~/lib/constants";
-import { useLocalStorage } from "../hooks/useLocalStorage";
 import { useResumeStore } from "~/hooks/useResumeStore";
 
 const meta = {
@@ -15,12 +11,8 @@ const meta = {
 };
 
 const upload = () => {
-  // const { auth, isLoading, fs, ai, kv } = usePuterStore();
   const [isProcessing, setIsProcessing] = useState(false);
   const [statusText, setStatusText] = useState("");
-
-  // const uuid = crypto.randomUUID();
-  // const [resume, setResume] = useLocalStorage(uuid, {});
 
   const navigate = useNavigate();
   const [file, setFile] = useState<File | null>(null);

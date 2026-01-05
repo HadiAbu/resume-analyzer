@@ -1,10 +1,11 @@
 import { Link } from "react-router";
+import { useAuthStore } from "~/hooks/useAuthStore";
 import { useI18n } from "~/lib/i18n";
-import { usePuterStore } from "~/lib/puter";
 
 const Navbar = () => {
   const { t, locale, setLocale } = useI18n();
-  const { isLoading, auth } = usePuterStore();
+  useAuthStore();
+  const auth = useAuthStore();
 
   return (
     <nav className="navbar">

@@ -1,4 +1,3 @@
-// app/src/store/useResumeStore.ts
 import { create } from "zustand";
 import axios from "axios";
 import { convertPdfToText } from "../lib/pdfParser";
@@ -43,8 +42,6 @@ export const useResumeStore = create<ResumeState>((set) => ({
     try {
       // 1. Convert to text locally
       const extractedText = await convertPdfToText(file);
-      console.log("Extracted Text:", extractedText);
-
       // 2. Send plain JSON to backend
       const response = await axios.post("http://localhost:5000/api/analyze", {
         text: extractedText,

@@ -21,7 +21,6 @@ const Resume = () => {
       if (isAnalyzing) <div>loading...</div>;
 
       const data = results;
-      console.log(data);
       data && setFeedback(data);
     };
 

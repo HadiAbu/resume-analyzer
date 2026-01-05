@@ -1,4 +1,3 @@
-// controllers/resumeController.ts
 import { OpenAI } from "openai";
 import { Request, Response } from "express";
 export const AIResponseFormat = `
@@ -53,7 +52,6 @@ export const analyzeResume = async (req: Request, res: Response) => {
     "Checking Key:",
     process.env.OPENAI_API_KEY ? "Found" : "Missing"
   );
-  console.log("BACKEND: Received analyzeResume request with body:", req.body);
   try {
     const { text, jobTitle, jobDescription } = req.body;
 

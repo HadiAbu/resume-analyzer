@@ -16,23 +16,23 @@ export interface Feedback {
   overallScore: number;
   ATS: {
     score: number;
-    tips: string[];
+    tips: Suggestion[];
   };
   toneAndStyle: {
     score: number;
-    tips: string[];
+    tips: Suggestion[];
   };
   content: {
     score: number;
-    tips: string[];
+    tips: Suggestion[];
   };
   structure: {
     score: number;
-    tips: string[];
+    tips: Suggestion[];
   };
   skills: {
     score: number;
-    tips: string[];
+    tips: Suggestion[];
   };
 }
 

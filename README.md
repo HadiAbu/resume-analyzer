@@ -1,75 +1,62 @@
-# Welcome to Resume Analyzer!
+# 📄 Resume AI Analyzer
 
-A tool designed to help give you feedback and tips on your resume and relevancy for the role, with ATS scores, tips and more!
+An AI-powered platform designed to help job seekers optimize their resumes for Applicant Tracking Systems (ATS). By leveraging OpenAI's GPT models, the application provides detailed feedback, scoring, and actionable tips to improve resume quality.
 
-<img width="1711" height="844" alt="image" src="https://github.com/user-attachments/assets/4eb5e8ae-552e-4424-bb85-df679568e20e" />
-<img width="1711" height="848" alt="image" src="https://github.com/user-attachments/assets/58c4ca9f-d0fa-4a6b-8580-2a326e563fbf" />
+## ✨ Features
 
+* **PDF Resume Parsing**: Upload and extract text from resumes automatically.
+* **AI-Driven Analysis**: Comprehensive evaluation of resume content, tone, and structure.
+* **ATS Optimization**: Specific feedback on keywords and formatting to bypass ATS filters.
+* **Scoring System**: Visual representation of resume strength across multiple categories.
+* **Secure Authentication**: JWT-based user authentication system.
 
+## 🚀 Getting Started
+
+### Prerequisites
+
+* **Node.js**: v18.0.0 or higher
+* **OpenAI Account**: For API access
 
 ### Installation
 
-Install the dependencies:
+1.  **Clone the repository:**
+    ```bash
+    git clone [https://github.com/HadiAbu/resume-analyzer.git](https://github.com/HadiAbu/resume-analyzer.git)
+    cd resume-analyzer
+    ```
 
-```bash
-npm install
-```
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
 
-### Development
+3.  **Configure Environment Variables:**
+    Create a `.env` file in the root directory. You **must** include these two keys for the application to function:
 
-Start the development server with HMR:
+    ```env
+    # Your secret key from the OpenAI Dashboard
+    OPENAI_API_KEY=your_openai_api_key_here
 
-```bash
-npm run dev
-```
+    # A long, random string used to sign and verify authentication tokens
+    JWT_SECRET=your_super_secure_jwt_secret_here
+    ```
 
-Your application will be available at `http://localhost:5173`.
+4.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
 
-## Building for Production
+5.  Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-Create a production build:
+## 🔑 Key Configuration
 
-```bash
-npm run build
-```
+* **OPENAI_API_KEY**: Powers the resume analysis engine. Ensure your account has sufficient credits/quota.
+* **JWT_SECRET**: Critical for securing user sessions. Do not share this or commit it to your repository.
 
-## Deployment
+## 🤝 Contributing
 
-### Docker Deployment
-
-To build and run using Docker:
-
-```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
-```
-
-The containerized application can be deployed to any platform that supports Docker, including:
-
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
-```
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
-
----
-
-Built with ❤️ using React Router.
+1.  Fork the Project
+2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4.  Push to the Branch (`git push origin feature/AmazingFeature`)
+5.  Open a Pull Request

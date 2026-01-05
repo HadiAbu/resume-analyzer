@@ -17,6 +17,25 @@ An AI-powered platform designed to help job seekers optimize their resumes for A
 - **Node.js**: v18.0.0 or higher
 - **OpenAI Account**: For API access
 
+# 📄 Resume AI Analyzer
+
+An AI-powered platform designed to help job seekers optimize their resumes for Applicant Tracking Systems (ATS). By leveraging OpenAI's GPT models, the application provides detailed feedback, scoring, and actionable tips to improve resume quality.
+
+## ✨ Features
+
+- **PDF Resume Parsing**: Upload and extract text from resumes automatically.
+- **AI-Driven Analysis**: Comprehensive evaluation of resume content, tone, and structure.
+- **ATS Optimization**: Specific feedback on keywords and formatting to bypass ATS filters.
+- **Scoring System**: Visual representation of resume strength across multiple categories.
+- **Secure Authentication**: JWT-based user authentication system.
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- **Node.js**: v18.0.0 or higher
+- **OpenAI Account**: For API access
+
 ### Installation
 
 1.  **Clone the repository:**

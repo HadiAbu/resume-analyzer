@@ -21,19 +21,15 @@ const Resume = () => {
   const navigate = useNavigate();
   const [myResume, setMyResume] = useLocalStorage(id, {});
 
-  useEffect(() => {
-    if (!isLoading && !auth.isAuthenticated)
-      navigate(`/auth?next=/resume/${id}`);
-  }, [isLoading]);
+  // useEffect(() => {
+  // if (!isLoading && !auth.isAuthenticated)
+  // navigate(`/auth?next=/resume/${id}`);
+  // }, [isLoading]);
 
   useEffect(() => {
     const loadResume = async () => {
       const resume = await kv.get(`resume:${id}`);
       const resumes = await kv.get(`resumes`);
-      console.log(id);
-      console.log(resume);
-      console.log(resumes);
-      console.log(myResume.data);
 
       if (!myResume.data) return;
 
@@ -53,8 +49,6 @@ const Resume = () => {
       setImageUrl(imageUrl);
       const feedbackData = JSON.parse(data.feedback[0].text);
       setFeedback(feedbackData);
-      console.log(feedbackData);
-      console.log({ resumeUrl, imageUrl, feedback: feedbackData });
     };
 
     loadResume();

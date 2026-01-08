@@ -8,7 +8,7 @@
       "*": ["node_modules/*"]
     },
     "outDir": "./dist",
-    "rootDir": "./src",
+    "rootDir": "./",
     "strict": true /* Enable all strict type-checking options */,
     "esModuleInterop": true /* Critical for importing pdf-parse and express */,
     "skipLibCheck": true /* Speeds up compilation */,

@@ -10,7 +10,22 @@ import {
 import type { Route } from "./+types/root";
 import "./app.css";
 import { LanguageProvider } from "./lib/i18n";
+import axios from "axios";
 
+import { useAuthStore } from "./hooks/useAuthStore";
+
+//Auto-logout when the backend returns 401/403
+axios.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      useAuthStore.getState().logout();
+    }
+    return Promise.reject(error);
+  }
+);
+
+// importing fonts
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   {

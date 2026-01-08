@@ -45,7 +45,6 @@ export const AIResponseFormat = `
     }`;
 
 const apiKey = process.env.OPENAI_API_KEY;
-
 export const analyzeResume = async (req: Request, res: Response) => {
   const openai = new OpenAI({ apiKey: apiKey });
   console.log(

@@ -14,7 +14,7 @@ export const meta: Route.MetaFunction = () => {
 
 const Auth = () => {
   // New Auth Store hooks
-  const { setAuth, logout, isAuthenticated, user } = useAuthStore();
+  const { setAuth, logout, isAuthenticated } = useAuthStore();
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useI18n();

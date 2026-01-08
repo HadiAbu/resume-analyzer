@@ -2,6 +2,7 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 
+// only authenticated users can access this middleware
 export const authenticateToken = (
   req: Request,
   res: Response,

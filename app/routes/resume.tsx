@@ -27,6 +27,8 @@ const Resume = () => {
     loadResume();
   }, [id]);
 
+  if (results === null) return <div>404 resume not found</div>;
+
   return (
     <main className="!pt-0">
       <nav className="resume-nav">

@@ -4,7 +4,8 @@ import { useI18n } from "~/lib/i18n";
 
 const Navbar = () => {
   const { t, locale, setLocale } = useI18n();
-  const { isAuthenticated, pending } = useAuthStore();
+  const { isAuthenticated, pending, _hasHydrated } = useAuthStore();
+  const isLoading = !_hasHydrated || pending;
 
   return (
     <nav className="navbar">
@@ -15,12 +16,17 @@ const Navbar = () => {
         <Link to="/upload" className="primary-button w-fit">
           {t("navbar.upload")}
         </Link>
-        <Link to="/auth" className="secondary-button w-fit">
-          {pending
-            ? "loading.."
-            : isAuthenticated
-              ? t("navbar.signout")
-              : t("navbar.auth")}
+        <Link
+          to={isLoading ? "#" : "/auth"}
+          className={`secondary-button w-fit ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
+        >
+          {isLoading ? (
+            <div className="animate-pulse bg-gray-300 h-4 w-16 rounded" /> // A small skeleton bar
+          ) : isAuthenticated ? (
+            t("navbar.signout")
+          ) : (
+            t("navbar.auth")
+          )}
         </Link>
 
         <select

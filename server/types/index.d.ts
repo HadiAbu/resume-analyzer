@@ -61,14 +61,6 @@ export const AIResponseFormat = `
       };
     }`;
 
-declare global {
-  namespace Express {
-    interface Request {
-      // Add the user property here
-      user?: User;
-    }
-  }
-}
 export const prepareInstructions = ({
   jobTitle,
   jobDescription,

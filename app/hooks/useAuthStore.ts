@@ -16,6 +16,8 @@ interface AuthState {
   pending: boolean;
   setAuth: (user: User, token: string) => void;
   logout: () => void;
+  _hasHydrated: boolean;
+  setHasHydrated: (state: boolean) => void;
 }
 
 export const useAuthStore = create<AuthState>()(
@@ -24,7 +26,12 @@ export const useAuthStore = create<AuthState>()(
       user: null,
       token: null,
       isAuthenticated: false,
-      pending: true,
+      // pending: true,
+      _hasHydrated: false,
+      setHasHydrated: (state) => set({ _hasHydrated: state }),
+
+      // Keep pending: false here; we will rely on _hasHydrated for the initial load
+      pending: false,
 
       setAuth: (user, token) => {
         set({ user, token, isAuthenticated: true, pending: false });
@@ -46,7 +53,18 @@ export const useAuthStore = create<AuthState>()(
     {
       name: "auth-storage", // Saves to localStorage automatically
       onRehydrateStorage: () => (state) => {
-        if (!state?.token) return;
+        state?.setHasHydrated(true);
+        // 1. If no state was found in storage at all
+        if (!state) {
+          useAuthStore.setState({ pending: false });
+          return;
+        }
+
+        // 2. If no token exists, they aren't logged in
+        if (!state?.token) {
+          useAuthStore.setState({ pending: false });
+          return;
+        }
 
         try {
           const { exp } = jwtDecode<DecodedToken>(state.token);
@@ -58,10 +76,11 @@ export const useAuthStore = create<AuthState>()(
           } else {
             axios.defaults.headers.common["Authorization"] =
               `Bearer ${state.token}`;
-            state.pending = false;
+            useAuthStore.setState({ pending: false });
           }
         } catch {
           state.logout();
+          useAuthStore.setState({ pending: false });
         }
       },
     }

@@ -140,7 +140,10 @@ const Auth = () => {
               <button
                 type="button"
                 className="text-blue-500 text-sm hover:underline"
-                onClick={() => setIsLogin(!isLogin)}
+                onClick={() => {
+                  setIsLogin(!isLogin);
+                  setError("");
+                }}
               >
                 {isLogin
                   ? "Need an account? Register"
